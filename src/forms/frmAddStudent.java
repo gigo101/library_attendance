@@ -44,6 +44,8 @@ public class frmAddStudent extends javax.swing.JFrame {
         this.formStatus=formStatus;
         JOptionPane.showMessageDialog(null, this.formStatus);
         allmethods.fillcombo(cmbCourse, "Select * from tbl_course","courseName");
+        this.formStatus=formStatus;
+        txtstudid.setText(studid);
     }
     
     private void fillcombo(){
