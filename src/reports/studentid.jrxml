@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="studentid" language="groovy" pageWidth="216" pageHeight="300" columnWidth="196" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="829d6e7f-2f7b-4579-8873-04e63394614c">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="74"/>
+	<parameter name="sid" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select s.studid,concat(s.firstname," ",s.initial,"."," ",s.lastname) as studname,s.course from tbl_student s where s.studid=$P{sid};]]>
+	</queryString>
+	<field name="studid" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="studname" class="java.lang.String"/>
+	<field name="course" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0588fa7f-6c6f-46be-b013-d9f3c23e9152" x="0" y="0" width="196" height="13"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saint Mary's College]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cd796acf-b32a-4ad1-9599-3f147ec80875" x="0" y="13" width="196" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Library]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="84af8b7a-0cb7-4c9f-ad4f-8650f8c84893" mode="Opaque" x="0" y="33" width="196" height="20" backcolor="#354CDA"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Library Identification Card]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="205" splitType="Stretch">
+			<textField>
+				<reportElement uuid="9698677c-62e2-4fb3-9e07-c4c154629ad7" x="0" y="21" width="196" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{studname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="26695ca4-4731-4fcb-9d1d-dc68360c829a" x="0" y="41" width="196" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{course}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="279c2e61-d037-4348-80c8-c84652c43b34" stretchType="RelativeToBandHeight" x="27" y="82" width="153" height="46"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barHeight="60">
+					<jr:codeExpression><![CDATA[$P{sid}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement uuid="c8550377-bdd9-487a-9f08-83c758be4cb2" x="0" y="128" width="196" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{sid}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a12de3ac-c3cf-4610-a97b-d780fd738f15" x="0" y="185" width="196" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[College Librarian]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="0673be61-a87b-4256-a4f9-318fda2da0d3" x="0" y="148" width="196" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="c91c93a5-1a27-45ae-8e32-85c26c454cf6" x="0" y="165" width="196" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Weng Arapoc]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="6" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
