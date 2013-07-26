@@ -187,15 +187,13 @@ public class frmStudent extends javax.swing.JFrame {
     private void table_studentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_studentMouseClicked
         // TODO add your handling code here:
         int row=table_student.getSelectedRow();
-        String Table_click= (table_student.getModel().getValueAt(row, 0).toString());
-        tableindex=Table_click;  
-        studid=(table_student.getModel().getValueAt(row, 1).toString());
-        firstname=(table_student.getModel().getValueAt(row, 2).toString());
-        lastname=(table_student.getModel().getValueAt(row, 3).toString());
-        initial=(table_student.getModel().getValueAt(row, 4).toString());
-        sex=(table_student.getModel().getValueAt(row, 5).toString());
-        courseyear=(table_student.getModel().getValueAt(row, 6).toString());
-        course=(table_student.getModel().getValueAt(row, 7).toString());
+        studid= (table_student.getModel().getValueAt(row, 0).toString());
+        firstname=(table_student.getModel().getValueAt(row, 1).toString());
+        lastname=(table_student.getModel().getValueAt(row, 2).toString());
+        initial=(table_student.getModel().getValueAt(row, 3).toString());
+        sex=(table_student.getModel().getValueAt(row, 4).toString());
+        courseyear=(table_student.getModel().getValueAt(row, 5).toString());
+        course=(table_student.getModel().getValueAt(row, 6).toString());
         
         //roomname= (tbl_rooms.getModel().getValueAt(row, 1).toString());
         //roomtype=(tbl_rooms.getModel().getValueAt(row, 2).toString());

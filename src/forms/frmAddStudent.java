@@ -20,55 +20,36 @@ public class frmAddStudent extends javax.swing.JFrame {
     ResultSet rs=null;
     PreparedStatement pst=null;
     int formStatus=0;
-    
+    String studid;
     public frmAddStudent() {
         initComponents();
         conn=javaconnect.ConnecrDb();
-        fillcombo();
         allmethods.fillcombo(cmbCourse, "Select * from tbl_course","courseName");
     }
     
     public frmAddStudent(int formStatus){
         initComponents();
         conn=javaconnect.ConnecrDb();
-        fillcombo();
         this.formStatus=formStatus;
         JOptionPane.showMessageDialog(null, this.formStatus);
-        allmethods.fillcombo(cmbCourse, "Select * from tbl_course","courseName");
+        allmethods.fillcombo(cmbCourse, "Select * from tbl_course","courseName");   
     }
     
     public frmAddStudent(int formStatus,String studid,String firstname,String lastname,String initial,String sex,String courseyear,String course){
         initComponents();
         conn=javaconnect.ConnecrDb();
-        fillcombo();
         this.formStatus=formStatus;
         JOptionPane.showMessageDialog(null, this.formStatus);
         allmethods.fillcombo(cmbCourse, "Select * from tbl_course","courseName");
+        this.studid=studid;
         this.formStatus=formStatus;
         txtstudid.setText(studid);
+        txtfname.setText(firstname);
+        txtlname.setText(lastname);
+        txtmi.setText(initial);
     }
     
-    private void fillcombo(){
-        switch(formStatus){
-            case 1:
-                try {
 
-                        String sql="Select * from tbl_course";
-                        pst=conn.prepareStatement(sql);
-                        rs=pst.executeQuery();
-
-                        while(rs.next()){
-                            String course= rs.getString(2);
-                            cmbCourse.addItem(course);
-                        }
-
-                 } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e);
-                 }
-            break;
-        
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -252,23 +233,63 @@ public class frmAddStudent extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try {
-            String sql= "Insert into tbl_student (studid,firstname,lastname,initial,sex,courseyear,course) values (?,?,?,?,?,?,?)";
-            pst=conn.prepareStatement(sql);
-            pst.setString(1, txtstudid.getText());
-            pst.setString(2, txtfname.getText());
-            pst.setString(3, txtlname.getText());
-            pst.setString(4, txtmi.getText());
-            pst.setString(5, (String)cmbSex.getSelectedItem());
-            pst.setString(6, (String)cmbYear.getSelectedItem());
-            pst.setString(7, (String)cmbCourse.getSelectedItem());
             
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Student Info Saved");
-            this.dispose();
-            new frmStudent().setVisible(true);
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+        }
+        
+        
+        
+        
+        
+         switch(formStatus){
+            case 1:
+                
+                try {
+                    String sql= "Insert into tbl_student (studid,firstname,lastname,initial,sex,courseyear,course) values (?,?,?,?,?,?,?)";
+                    pst=conn.prepareStatement(sql);
+                    pst.setString(1, txtstudid.getText());
+                    pst.setString(2, txtfname.getText());
+                    pst.setString(3, txtlname.getText());
+                    pst.setString(4, txtmi.getText());
+                    pst.setString(5, (String)cmbSex.getSelectedItem());
+                    pst.setString(6, (String)cmbYear.getSelectedItem());
+                    pst.setString(7, (String)cmbCourse.getSelectedItem());
+
+                    pst.execute();
+                    JOptionPane.showMessageDialog(null, "Student Info Saved");
+                    this.dispose();
+                    new frmStudent().setVisible(true);
+                    
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+                
+                
+
+                break;
+            
+            case 2:
+                try {
+                    
+                    
+                    String sql2 ="Update tbl_student set studid='"+txtstudid.getText() +"',firstname='"+txtfname.getText() +"',lastname='"+txtlname.getText() +"',initial='"+txtmi.getText()+"',sex='"+cmbSex.getSelectedItem() +"',courseyear='"+cmbYear.getSelectedItem()+"',course='"+cmbCourse.getSelectedItem()+"' where studid='"+studid +"'";
+                    pst=conn.prepareStatement(sql2);
+                    
+                    pst.execute();
+
+                    JOptionPane.showMessageDialog(null, "Data updated!"); 
+                    this.dispose();
+                    new frmStudent().setVisible(true);
+                    
+                } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                }
+            break;
+            
+            default:
+                break;
         }
     }//GEN-LAST:event_cmdsaveActionPerformed
 
