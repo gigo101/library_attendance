@@ -67,5 +67,31 @@ public class allmethods {
             } 
 
     }
+        
+        
+    public static void delete_date(String sql,String inputparam){
+        Connection conn=null;
+        ResultSet rs=null;
+        PreparedStatement pst=null;
+        conn=javaconnect.ConnecrDb();
+        
+        int p=JOptionPane.showConfirmDialog(null, "Do you want to delete?", "Delete", JOptionPane.YES_NO_OPTION);
+        
+        if (p==0){
+        
+        try {
+            
+            pst=conn.prepareStatement(sql);
+            pst.setString(1, inputparam);
+            pst.execute();
+            
+            JOptionPane.showMessageDialog(null, "Data deleted!"); 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);                 
+            
+        }
+        
+        }
+    }
     
 }

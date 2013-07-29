@@ -169,6 +169,10 @@ public class frmStudent extends javax.swing.JFrame {
     private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
         // TODO add your handling code here:
         
+        allmethods.delete_date("Delete from tbl_student where studid=?", studid);
+        allmethods.Update_table(table_student, "Select * from tbl_student");
+        
+        
     }//GEN-LAST:event_cmdDeleteActionPerformed
 
     private void cmdCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCloseActionPerformed
@@ -194,7 +198,6 @@ public class frmStudent extends javax.swing.JFrame {
         sex=(table_student.getModel().getValueAt(row, 4).toString());
         courseyear=(table_student.getModel().getValueAt(row, 5).toString());
         course=(table_student.getModel().getValueAt(row, 6).toString());
-        
         //roomname= (tbl_rooms.getModel().getValueAt(row, 1).toString());
         //roomtype=(tbl_rooms.getModel().getValueAt(row, 2).toString());
 

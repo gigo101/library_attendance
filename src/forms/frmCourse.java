@@ -7,6 +7,7 @@ package forms;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import modules.allmethods;
 import modules.javaconnect;
 
@@ -19,6 +20,7 @@ public class frmCourse extends javax.swing.JFrame {
     Connection conn=null;
     ResultSet rs=null;
     PreparedStatement pst=null;
+    String courseid;
     /**
      * Creates new form frmCourse
      */
@@ -27,7 +29,7 @@ public class frmCourse extends javax.swing.JFrame {
     public frmCourse() {
         initComponents();
         conn= javaconnect.ConnecrDb();
-        allmethods.Update_table(jTable1, "Select * from tbl_course");
+        allmethods.Update_table(tbl_course, "Select * from tbl_course");
     }
 
     /**
@@ -40,7 +42,7 @@ public class frmCourse extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_course = new javax.swing.JTable();
         cmdAdd = new javax.swing.JButton();
         cmdEdit = new javax.swing.JButton();
         cmdDelete = new javax.swing.JButton();
@@ -48,7 +50,7 @@ public class frmCourse extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_course.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -59,7 +61,12 @@ public class frmCourse extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbl_course.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_courseMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl_course);
 
         cmdAdd.setText("Add");
         cmdAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -71,6 +78,11 @@ public class frmCourse extends javax.swing.JFrame {
         cmdEdit.setText("Edit");
 
         cmdDelete.setText("Delete");
+        cmdDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDeleteActionPerformed(evt);
+            }
+        });
 
         cmdClose.setText("Close");
         cmdClose.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +137,18 @@ public class frmCourse extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cmdCloseActionPerformed
 
+    private void tbl_courseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_courseMouseClicked
+        // TODO add your handling code here:
+        int row=tbl_course.getSelectedRow();
+        courseid= (tbl_course.getModel().getValueAt(row, 0).toString());
+    }//GEN-LAST:event_tbl_courseMouseClicked
+
+    private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
+        // TODO add your handling code here:
+        allmethods.delete_date("Delete from tbl_course where courseId=?", courseid);
+        allmethods.Update_table(tbl_course, "Select * from tbl_course");
+    }//GEN-LAST:event_cmdDeleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -165,6 +189,6 @@ public class frmCourse extends javax.swing.JFrame {
     private javax.swing.JButton cmdDelete;
     private javax.swing.JButton cmdEdit;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbl_course;
     // End of variables declaration//GEN-END:variables
 }
