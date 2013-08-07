@@ -126,14 +126,13 @@ public class frmSetSemSy extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdSyActionPerformed
 
     private void cmdOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdOkActionPerformed
-        // TODO add your handling code here:
-        new main_form().setVisible(true);
-        
+        // TODO add your handling code here:        
         String semester = (String)cmbSem.getSelectedItem();
         
         String schoolyear=(String)cmdSy.getSelectedItem();
         
         new main_form(semester,schoolyear).setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_cmdOkActionPerformed
 
