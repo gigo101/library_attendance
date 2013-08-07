@@ -21,6 +21,10 @@ public class frmCourse extends javax.swing.JFrame {
     ResultSet rs=null;
     PreparedStatement pst=null;
     String courseid;
+    String courseName;
+    String courseDescription;
+    int formStatus;
+    
     /**
      * Creates new form frmCourse
      */
@@ -76,6 +80,11 @@ public class frmCourse extends javax.swing.JFrame {
         });
 
         cmdEdit.setText("Edit");
+        cmdEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEditActionPerformed(evt);
+            }
+        });
 
         cmdDelete.setText("Delete");
         cmdDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -128,8 +137,10 @@ public class frmCourse extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddActionPerformed
-        // TODO add your handling code here:
-        new frmAddCourse().setVisible(true);
+        // TODO add your handling code here: 
+        formStatus=1;
+        this.dispose();
+        new frmAddCourse(formStatus).setVisible(true);
     }//GEN-LAST:event_cmdAddActionPerformed
 
     private void cmdCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCloseActionPerformed
@@ -141,6 +152,9 @@ public class frmCourse extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row=tbl_course.getSelectedRow();
         courseid= (tbl_course.getModel().getValueAt(row, 0).toString());
+        courseName=(tbl_course.getModel().getValueAt(row, 1).toString());
+        courseDescription=(tbl_course.getModel().getValueAt(row, 2).toString());
+        
     }//GEN-LAST:event_tbl_courseMouseClicked
 
     private void cmdDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteActionPerformed
@@ -148,6 +162,13 @@ public class frmCourse extends javax.swing.JFrame {
         allmethods.delete_date("Delete from tbl_course where courseId=?", courseid);
         allmethods.Update_table(tbl_course, "Select * from tbl_course");
     }//GEN-LAST:event_cmdDeleteActionPerformed
+
+    private void cmdEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditActionPerformed
+        // TODO add your handling code here:
+        formStatus=2;
+        new frmAddCourse(formStatus,courseid,courseName,courseDescription).setVisible(true);
+        
+    }//GEN-LAST:event_cmdEditActionPerformed
 
     /**
      * @param args the command line arguments

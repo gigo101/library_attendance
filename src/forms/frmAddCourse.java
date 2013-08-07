@@ -19,12 +19,39 @@ public class frmAddCourse extends javax.swing.JFrame {
     Connection conn=null;
     ResultSet rs=null;
     PreparedStatement pst=null;
+    int formStatus=0;
+    String courseName;
+    String courseDescription;
+    String courseId;
+    
     /**
      * Creates new form frmAddCourse
      */
     public frmAddCourse() {
         initComponents();
         conn= javaconnect.ConnecrDb();
+    }
+    
+    public frmAddCourse(int formStatus){
+        
+        initComponents();
+        conn= javaconnect.ConnecrDb();
+        this.formStatus=formStatus;
+            
+    }
+    
+    public frmAddCourse(int formStatus,String courseId,String courseName,String courseDescription){
+        
+        initComponents();
+        conn= javaconnect.ConnecrDb();
+        this.formStatus=formStatus;
+        this.courseId=courseId;
+        this.courseName=courseName;
+        this.courseDescription=courseDescription;
+        
+        txtCourseName.setText(courseName);
+        txtCourseDescription.setText(courseDescription);
+    
     }
 
     /**
@@ -117,18 +144,37 @@ public class frmAddCourse extends javax.swing.JFrame {
 
     private void cmdSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSaveActionPerformed
         // TODO add your handling code here:
-        try {
-            String sql= "Insert into tbl_course (courseName,courseDescription) values (?,?)";
-            pst=conn.prepareStatement(sql);
-            pst.setString(1, txtCourseName.getText());
-            pst.setString(2, txtCourseDescription.getText()); 
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Course Info Saved");
-            this.dispose();
-            new frmCourse().setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+     
+         switch(formStatus){
+            case 1: 
+                JOptionPane.showMessageDialog(null, formStatus);
+                try {
+                    String sql= "Insert into tbl_course (courseName,courseDescription) values (?,?)";
+                    pst=conn.prepareStatement(sql);
+                    pst.setString(1, txtCourseName.getText());
+                    pst.setString(2, txtCourseDescription.getText()); 
+                    pst.execute();
+                    JOptionPane.showMessageDialog(null, "Course Info Saved");
+                    this.dispose();
+                    new frmCourse().setVisible(true);
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+
+                }
+
+                break;
+            
+            case 2:
+                
+                
+                    
+            break;
+            
+            default:
+                break;
         }
+        
     }//GEN-LAST:event_cmdSaveActionPerformed
 
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed

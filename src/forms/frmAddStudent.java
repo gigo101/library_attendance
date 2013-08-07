@@ -230,22 +230,9 @@ public class frmAddStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbSexActionPerformed
 
     private void cmdsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdsaveActionPerformed
-        // TODO add your handling code here:
-        
-        try {
-            
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        
-        
-        
-        
-        
+        // TODO add your handling code here:    
          switch(formStatus){
-            case 1:
-                
+            case 1:         
                 try {
                     String sql= "Insert into tbl_student (studid,firstname,lastname,initial,sex,courseyear,course) values (?,?,?,?,?,?,?)";
                     pst=conn.prepareStatement(sql);
@@ -265,27 +252,24 @@ public class frmAddStudent extends javax.swing.JFrame {
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
-                
-                
 
                 break;
             
             case 2:
-                try {
-                    
+                
+                try {       
                     
                     String sql2 ="Update tbl_student set studid='"+txtstudid.getText() +"',firstname='"+txtfname.getText() +"',lastname='"+txtlname.getText() +"',initial='"+txtmi.getText()+"',sex='"+cmbSex.getSelectedItem() +"',courseyear='"+cmbYear.getSelectedItem()+"',course='"+cmbCourse.getSelectedItem()+"' where studid='"+studid +"'";
-                    pst=conn.prepareStatement(sql2);
-                    
+                    pst=conn.prepareStatement(sql2);  
                     pst.execute();
 
                     JOptionPane.showMessageDialog(null, "Data updated!"); 
                     this.dispose();
                     new frmStudent().setVisible(true);
-                    
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e);
                 }
+                
             break;
             
             default:
