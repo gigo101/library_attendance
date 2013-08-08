@@ -166,11 +166,21 @@ public class frmAddCourse extends javax.swing.JFrame {
                 break;
             
             case 2:
-                
-                
+                try {       
                     
+                    String sql2 ="Update tbl_course set courseName='"+txtCourseName.getText() +"',courseDescription='"+txtCourseDescription.getText() +"' where courseId='"+courseId +"'";
+                    pst=conn.prepareStatement(sql2);  
+                    pst.execute();
+
+                    JOptionPane.showMessageDialog(null, "Data updated!"); 
+                    this.dispose();
+                    new frmCourse().setVisible(true);
+                } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                }
+                
             break;
-            
+                       
             default:
                 break;
         }

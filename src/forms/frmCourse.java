@@ -167,6 +167,7 @@ public class frmCourse extends javax.swing.JFrame {
         // TODO add your handling code here:
         formStatus=2;
         new frmAddCourse(formStatus,courseid,courseName,courseDescription).setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_cmdEditActionPerformed
 
